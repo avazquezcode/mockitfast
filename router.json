@@ -1,0 +1,71 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/v1/users",
+      "name": "Create a user",
+      "description": "Create a user",
+      "method": "POST",
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        "body": {
+          "users": {
+            "id": 2,
+            "name": "John Doe"
+          }
+        }
+      }
+    },
+    {
+      "path": "/api/v1/users",
+      "description": "Get all users ",
+      "method": "GET",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "users": [
+            {
+              "id": 1,
+              "name": "John Doe"
+            },
+            {
+              "id": 2,
+              "name": "Jane Doe"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "/api/v1/redirect",
+      "description": "Example of a redirect",
+      "method": "GET",
+      "response": {
+        "headers": {
+          "Content-Type": "redirect",
+          "location": "http://google.com"
+        },
+        "status": 307
+      }
+    },
+    {
+      "path": "/api/v1/plain",
+      "description": "Plain response example",
+      "method": "GET",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "text/plain",
+          "Cache-Control": "no-cache"
+        },
+        "body": "This is a plain text"
+      }
+    }
+  ]
+}
