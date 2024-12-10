@@ -1,9 +1,11 @@
+import json
+import time
+
+from domain.model import Endpoint, Response
+
 from fastapi import APIRouter
 from fastapi import Response as FastAPIResponse
 from fastapi.responses import JSONResponse, PlainTextResponse, HTMLResponse, RedirectResponse
-from domain.model import Endpoint, Response
-import json
-import time
 
 
 class Handler:
