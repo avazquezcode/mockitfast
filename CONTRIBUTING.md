@@ -22,9 +22,11 @@ Run `make run`
 ## Router config
 
 > **_NOTE:_**  Later on I will create a documentation specifying exactly the capabilities / supported options.
+
 You can configure your mocked API in the [router.json](./router.json) file.
 
 ## Swagger
 
 > **_NOTE:_**  The following URL might change depending on what is configured in your .env file.
+
 After running the project you can access the swagger of your mocked API going to: [localhost:3000/docs](localhost:3000/docs)
