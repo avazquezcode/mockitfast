@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: mockitfast_app
     build:
       context: .
       dockerfile: build/Dockerfile

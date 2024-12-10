@@ -6,3 +6,6 @@ build:
 
 run:
 	docker-compose up -d
+
+logs:
+	docker logs -f mockitfast_app
