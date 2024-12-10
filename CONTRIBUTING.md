@@ -16,7 +16,8 @@ This file contains a guideline about how to build the app in the local machine, 
 
 
 ## Run
-Execute `make run`
+
+Run `make run`
 
 ## Router config
 
