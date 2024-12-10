@@ -1,4 +1,4 @@
-# Mock it fast
+# Mock-it (really) fast :D
 
 > **_NOTE:_**  This project is under development (working on it, for fun, on my free time). This means it's not ready to be used (yet)
 
