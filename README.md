@@ -6,3 +6,4 @@
 
 A super fast HTTP mock server, written with love in python with FastAPI :)
 
+The [contributing](CONTRIBUTING.md) file, contains the instructions to build & run the project, and some data about how the system works.
