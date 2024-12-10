@@ -15,7 +15,7 @@ This file contains a guideline about how to build the app in the local machine, 
 5) Run `make build`
 
 
-## Run
+## Start
 
 Run `make run`
 
