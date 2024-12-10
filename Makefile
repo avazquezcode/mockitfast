@@ -1,5 +1,3 @@
-venv: venv/touchfile
-
 activate:
 	. .venv/bin/activate;
 

@@ -8,9 +8,11 @@ This file contains a guideline about how to build the app in the local machine, 
 
 **For now:**
 
-1) **Pre-requisite**: Make sure to have **python3** installed
-3) Run `make setup` & edit the variables in `.env` file
-2) Run `make build`
+1) **Pre-requisite**: Make sure to have **python** installed
+2) Run `python -m venv .venv` to create a .venv, and then: `source .venv/bin/activate` (**Every time you install a new package you should activate the environment.**)
+3) Run `echo "*" > .venv/.gitignore` to setup gitignore in venv
+4) Run `make setup` & edit the variables in `.env` file
+5) Run `make build`
 
 ## Run
 Run `make run`
@@ -18,11 +20,9 @@ Run `make run`
 ## Router config
 
 > **_NOTE:_**  Later on I will create a documentation specifying exactly the capabilities / supported options.
-
 You can configure your mocked API in the [router.json](./router.json) file.
 
 ## Swagger
 
-> **_NOTE:_**  The following URL might change depending on what you configure in your .env file.
-
+> **_NOTE:_**  The following URL might change depending on what is configured in your .env file.
 After running the project you can access the swagger of your mocked API going to: [localhost:3000/docs](localhost:3000/docs)
