@@ -24,6 +24,7 @@ Run `make run`
 > **_NOTE:_**  Later on I will create a documentation specifying exactly the capabilities / supported options.
 
 You can configure your mocked API in the [router.json](./router.json) file.
+You can modify it on the run, while the service is running and the changes will be impacted on runtime. This is achieved using a really simple [file watcher](./src/watcher.py)
 
 ## Swagger
 
