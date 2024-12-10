@@ -14,8 +14,9 @@ This file contains a guideline about how to build the app in the local machine, 
 4) Run `make setup` & edit the variables in `.env` file
 5) Run `make build`
 
+
 ## Run
-Run `make run`
+Execute `make run`
 
 ## Router config
 
