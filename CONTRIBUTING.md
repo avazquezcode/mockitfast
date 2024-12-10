@@ -30,4 +30,4 @@ You can modify it on the run, while the service is running and the changes will 
 
 > **_NOTE:_**  The following URL might change depending on what is configured in your .env file.
 
-After running the project you can access the swagger of your mocked API going to: [127.0.0.1:3000/docs](127.0.0.1:3000/docs).
+After running the project you can access the swagger of your mocked API going to: [127.0.0.1:3000/docs](http://127.0.0.1:3000/docs).
