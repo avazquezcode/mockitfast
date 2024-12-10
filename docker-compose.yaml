@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+    ports: 
+      - "${PORT}:${PORT}"
+    env_file: .env
+    volumes:
+      - ./router.json:/code/router.json
+    networks:
+      - mockitfast
+    restart: always
+
+networks:
+  mockitfast:
+    driver: bridge

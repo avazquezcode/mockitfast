@@ -4,20 +4,12 @@ This file contains a guideline about how to build the app in the local machine, 
 
 ## Build
 
-> **_NOTE:_**  Later on I will also configure docker to build & run the project easily
-
-**For now:**
-
-1) **Pre-requisite**: Make sure to have **python** installed.
-2) Run `python -m venv .venv` to create a .venv, and then: `source .venv/bin/activate` (**Every time you install a new package you should activate the environment.**).
-3) Run `echo "*" > .venv/.gitignore` to setup gitignore in venv.
-4) Run `make setup` & edit the variables in `.env` file.
-5) Run `make build`.
-
+1) Run `make setup`, and edit the variables in .env file.
+2) Run `make build`.
 
 ## Start
 
-Run `make run`.
+Run `make run` to start the container.
 
 ## Router config
 

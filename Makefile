@@ -1,11 +1,8 @@
-activate:
-	. .venv/bin/activate;
-
 setup:
 	cp .env.dist .env
 
-build: activate
-	pip install -r requirements.txt
+build:
+	docker-compose build
 
-run: activate
-	python src/main.py
+run:
+	docker-compose up -d
