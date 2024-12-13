@@ -1,7 +1,5 @@
-import json
-import time
-
-from domain.model import Router, Response
+from domain.model import Router
+from api.handler import Handler
 
 from fastapi import APIRouter
 from fastapi import Response as FastAPIResponse
@@ -9,21 +7,6 @@ from fastapi.responses import JSONResponse, PlainTextResponse, HTMLResponse, Red
 
 CONTENT_TYPE_HEADER = "Content-Type"
 DEFAULT_CONTENT_TYPE = "application/json"
-
-
-class Handler:
-    def __init__(self, response_config: Response):
-        self.data = response_config
-
-    def response(self):
-        if self.data.delay is not None:
-            time.sleep(self.data.delay)
-
-        body = self.data.body
-        if type(body) is dict:
-            body = json.dumps(body)
-
-        return FastAPIResponse(body, self.data.status, self.data.headers)
 
 
 def get_api_router(router: Router) -> APIRouter:
