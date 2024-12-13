@@ -3,7 +3,7 @@ import signal
 import uvicorn
 import logging
 
-from api.api import get_app
+from api.app import get_app
 from config import Config
 
 from multiprocessing import Process
