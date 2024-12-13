@@ -7,5 +7,8 @@ build:
 run:
 	docker-compose up -d
 
+build_run:
+	docker-compose up -d --build
+
 logs:
 	docker logs -f mockitfast_app

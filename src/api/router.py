@@ -7,6 +7,9 @@ from fastapi import APIRouter
 from fastapi import Response as FastAPIResponse
 from fastapi.responses import JSONResponse, PlainTextResponse, HTMLResponse, RedirectResponse
 
+CONTENT_TYPE_HEADER = "Content-Type"
+DEFAULT_CONTENT_TYPE = "application/json"
+
 
 class Handler:
     def __init__(self, response_config: Response):
@@ -28,30 +31,42 @@ def get_api_router(router: Router) -> APIRouter:
 
     for endpoint in router.endpoints:
         handler = Handler(endpoint.response)
-        content_type_header = "application/json"  #  default
-        if endpoint.response.headers and "Content-Type" in endpoint.response.headers:
-            content_type_header = endpoint.response.headers["Content-Type"]
+        content_type = get_content_type(endpoint.response.headers)
+        response_class = map_response_class(content_type)
 
-        response_class = map_response_class(content_type_header)
-        api_router.add_api_route(endpoint.path,
-                                 handler.response,
-                                 methods=[endpoint.method],
-                                 name=endpoint.name,
-                                 description=endpoint.description,
-                                 status_code=endpoint.response.status,
-                                 response_class=response_class,
-                                 responses={
-                                     endpoint.response.status: {
-                                         "description": "Mocked response",
-                                         "content": {
-                                             content_type_header: {
-                                                 "example": endpoint.response.body
-                                             }
-                                         }
-                                     },
-                                 },
-                                 )
+        response_examples = build_response_examples(endpoint, content_type)
+
+        api_router.add_api_route(
+            endpoint.path,
+            handler.response,
+            methods=[endpoint.method],
+            name=endpoint.name,
+            description=endpoint.description,
+            status_code=endpoint.response.status,
+            response_class=response_class,
+            responses=response_examples,
+        )
+
     return api_router
+
+
+def get_content_type(headers) -> str:
+    if headers and CONTENT_TYPE_HEADER in headers:
+        return headers[CONTENT_TYPE_HEADER]
+    return DEFAULT_CONTENT_TYPE
+
+
+def build_response_examples(endpoint, content_type) -> dict:
+    return {
+        endpoint.response.status: {
+            "description": "Mocked response",
+            "content": {
+                content_type: {
+                    "example": endpoint.response.body,
+                }
+            },
+        }
+    }
 
 
 def map_response_class(content_type: str):
