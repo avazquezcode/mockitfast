@@ -1,5 +1,5 @@
 import unittest
-from utils.matching import replace_variables_in_str, replace_variables_in_dict
+from utils.templating import replace_variables_in_str, replace_variables_in_dict
 from dataclasses import dataclass
 
 

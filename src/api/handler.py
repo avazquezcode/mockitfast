@@ -2,7 +2,7 @@ import json
 import time
 
 from domain.model import Response
-from utils.matching import replace_variables_in_str, replace_variables_in_dict
+from utils.templating import replace_variables_in_str, replace_variables_in_dict
 
 from fastapi import Response as FastAPIResponse
 from fastapi import Request
