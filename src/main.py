@@ -2,7 +2,7 @@ import logging
 
 from watcher import watch_modification
 from server import Server
-from config import Config
+from config.config import Config
 
 from dotenv import load_dotenv
 

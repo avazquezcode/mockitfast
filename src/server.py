@@ -4,7 +4,7 @@ import uvicorn
 import logging
 
 from api.app import get_app
-from config import Config
+from config.config import Config
 
 from multiprocessing import Process
 from domain.model import Router
@@ -34,10 +34,16 @@ class Server:
     def load_router(self):
         router_config = open(self.config.router_config_path, 'r').read()
         return Router.model_validate(
-            from_json(router_config,
-                      allow_partial=True))
+            from_json(
+                router_config,
+                allow_partial=True
+            )
+        )
 
     def start_app_server(self):
-        uvicorn.run(get_app(self.load_router()),
-                    host=self.config.host,
-                    port=self.config.port)
+        app = get_app(self.load_router(), self.config)
+        uvicorn.run(
+            app,
+            host=self.config.host,
+            port=self.config.port
+        )
