@@ -1,35 +1,12 @@
-name: Docker Image CI
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+name: Docker Compose Actions Workflow
+on: push
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: |
-        docker build . --file build/Dockerfile --tag my-image-name:$(date +%s)
-      id: docker_build
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d --build
 
-    - name: Run the Docker container
-      run: |
-        docker run -d --name mockitfast my-image-name:$(date +%s)
-      id: docker_run
-
-    - name: Execute a test command inside the container
-      run: |
-        docker exec mockitfast make test
-
-    - name: Stop and remove the container
-      if: always()
-      run: |
-        docker stop my-container
-        docker rm my-container
+      - name: Test inside the container
+        run: docker exec mockitfast_app python3 -m unittest discover -s src -p 'test_*.py'
