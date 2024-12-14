@@ -12,6 +12,7 @@ if __name__ == "__main__":
     try:
         load_dotenv()
         config = Config()
+        config.load_from_env()
         server = Server(config)
     except Exception as e:
         logging.error(f"Error occurred on initial setup: {e}")

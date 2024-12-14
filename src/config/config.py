@@ -10,7 +10,14 @@ DEFAULT_HEALTH_CHECK_PATH = "/health/check"
 
 
 class Config:
-    def __init__(self):
+    host = DEFAULT_HOST
+    port = DEFAULT_PORT
+    watcher_interval_seconds = DEFAULT_WATCHER_INTERVAL
+    router_config_path = None
+    is_health_check_enabled = False
+    health_check_path = DEFAULT_HEALTH_CHECK_PATH
+
+    def load_from_env(self):
         #  Server configs
         self.host = os.getenv("HOST", default=DEFAULT_HOST)
         self.port = load_int("PORT", default=DEFAULT_PORT)
