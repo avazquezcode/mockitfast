@@ -1,6 +1,5 @@
 from domain.model import Router
 from api.handler import Handler
-
 from fastapi import APIRouter
 from fastapi import Response as FastAPIResponse
 from fastapi.responses import JSONResponse, PlainTextResponse, HTMLResponse, RedirectResponse

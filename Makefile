@@ -12,3 +12,6 @@ build_run:
 
 logs:
 	docker logs -f mockitfast_app
+
+test:
+	python3 -m unittest discover -s src -p 'test_*.py'

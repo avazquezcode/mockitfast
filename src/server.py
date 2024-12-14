@@ -45,5 +45,5 @@ class Server:
         uvicorn.run(
             app,
             host=self.config.host,
-            port=self.config.port
+            port=self.config.port,
         )

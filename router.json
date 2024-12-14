@@ -1,20 +1,20 @@
 {
   "endpoints": [
     {
-      "path": "/api/v1/users",
+      "path": "/api/v1/{id}/users",
       "name": "Create a user",
       "description": "Create a user",
-      "method": "POST",
+      "method": "GET",
       "response": {
-        "status": 201,
+        "status": 200,
         "headers": {
           "Content-Type": "application/json",
           "Cache-Control": "no-cache"
         },
         "body": {
-          "users": {
+          "{id}_users": {
             "id": 2,
-            "name": "John Doe"
+            "name": "John {id}"
           }
         }
       }
@@ -65,6 +65,19 @@
           "Cache-Control": "no-cache"
         },
         "body": "This is a plain text"
+      }
+    },
+    {
+      "path": "/api/v1/test/{user_id}/hey",
+      "description": "Plain response example",
+      "method": "GET",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "text/plain",
+          "Cache-Control": "no-cache"
+        },
+        "body": "This is a plain {user_id} text"
       }
     }
   ]
