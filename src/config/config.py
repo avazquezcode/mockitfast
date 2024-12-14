@@ -1,6 +1,6 @@
 import os
 
-ENV_TRUE_VALUES = ('true', '1')
+ENV_TRUE_VALUES = ("true", "1")
 
 # defaults
 DEFAULT_HOST = "0.0.0.0"
@@ -28,7 +28,6 @@ class Config:
             "HEALTH_CHECK_PATH", default=DEFAULT_HEALTH_CHECK_PATH)
 
 
-@staticmethod
 def load_int(env_var, default):
     try:
         return int(os.getenv(env_var, default))
@@ -36,6 +35,5 @@ def load_int(env_var, default):
         raise ValueError(f"{env_var} must be an integer")
 
 
-@staticmethod
 def load_bool(env_var, default="False"):
     return os.getenv(env_var, default).lower() in ENV_TRUE_VALUES
