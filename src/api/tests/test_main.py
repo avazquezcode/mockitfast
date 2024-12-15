@@ -1,8 +1,7 @@
-import time
 import unittest
 from dataclasses import dataclass
 
-from api_tests.endpoints import get_endpoints
+from api.tests.endpoints import get_endpoints
 from api.app import get_app
 from domain.model import Router
 from config.config import Config
