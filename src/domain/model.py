@@ -26,4 +26,4 @@ class Endpoint(BaseModel):
 
 
 class Router(BaseModel):
-    endpoints: list[Endpoint]
+    endpoints: list[Endpoint] = []
