@@ -108,6 +108,12 @@ class Test(unittest.TestCase):
                 target={"{a}_1": {"b_{a}": "{a}"}},
                 expected={"b_1": {"b_b": "b"}},
             ),
+            TestCase(
+                name="match available in a list value",
+                variables={"a": "b"},
+                target={"abc": {"b": ["1", "{a}"]}},
+                expected={"abc": {"b": ["1", "b"]}},
+            ),
         ]
 
         for test in tests:
