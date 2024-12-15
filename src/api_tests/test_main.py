@@ -9,19 +9,16 @@ from dataclasses import dataclass
 
 
 class Test(unittest.TestCase):
-    router = Router()
-    router.endpoints = []
-    config = Config()
-
-    # enable health check
-    config.is_health_check_enabled = True
-
-    app = get_app(router, config)
-    client = TestClient(app)
-
     def test_health_check(self):
-        response = self.client.get("/health/check")
-        print(response)
+        router = Router()
+        config = Config()
+        config.is_health_check_enabled = True
+
+        app = get_app(router, config)
+        client = TestClient(app)
+
+        response = client.get("/health/check")
+
         assert response.status_code == 200
         assert response.json() == {"success": True}
 
