@@ -3,7 +3,8 @@ from unittest.mock import patch
 import os
 
 # Assuming the provided code is in a module named config_module
-from config.config import Config, load_int, load_bool, DEFAULT_HOST, DEFAULT_PORT, DEFAULT_WATCHER_INTERVAL, DEFAULT_HEALTH_CHECK_PATH, ENV_TRUE_VALUES
+from config.config import Config, load_int, load_bool
+from config.config import DEFAULT_HOST, DEFAULT_PORT, DEFAULT_WATCHER_INTERVAL, DEFAULT_HEALTH_CHECK_PATH, ENV_TRUE_VALUES
 
 
 class TestConfig_LoadFromEnv(unittest.TestCase):
