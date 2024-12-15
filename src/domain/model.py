@@ -8,6 +8,11 @@ class MethodEnum(str, Enum):
     post = 'POST'
     put = 'PUT'
     delete = 'DELETE'
+    patch = 'PATCH'
+    head = 'HEAD'
+    options = 'OPTIONS'
+    trace = 'TRACE'
+    connect = 'CONNECT'
 
 
 class Response(BaseModel):
