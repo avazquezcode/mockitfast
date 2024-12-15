@@ -2,10 +2,9 @@ from domain.model import Router
 from api.handler import Handler
 from fastapi import APIRouter
 from fastapi import Response as FastAPIResponse
-from fastapi.responses import JSONResponse, PlainTextResponse, HTMLResponse, RedirectResponse
 
 CONTENT_TYPE_HEADER = "Content-Type"
-DEFAULT_CONTENT_TYPE = "application/json"
+DEFAULT_CONTENT_TYPE = "undefined"
 
 
 def get_api_router(router: Router) -> APIRouter:
@@ -14,8 +13,6 @@ def get_api_router(router: Router) -> APIRouter:
     for endpoint in router.endpoints:
         handler = Handler(endpoint.response)
         content_type = get_content_type(endpoint.response.headers)
-        response_class = map_response_class(content_type)
-
         response_examples = build_response_examples(endpoint, content_type)
 
         api_router.add_api_route(
@@ -25,7 +22,7 @@ def get_api_router(router: Router) -> APIRouter:
             name=endpoint.name,
             description=endpoint.description,
             status_code=endpoint.response.status,
-            response_class=response_class,
+            response_class=FastAPIResponse,
             responses=response_examples,
         )
 
@@ -49,17 +46,3 @@ def build_response_examples(endpoint, content_type) -> dict:
             },
         }
     }
-
-
-def map_response_class(content_type: str):
-    match content_type:
-        case "application/json":
-            return JSONResponse
-        case "text/html":
-            return HTMLResponse
-        case "text/plain":
-            return PlainTextResponse
-        case "redirect":
-            return RedirectResponse
-        case _:
-            return FastAPIResponse
