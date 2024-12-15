@@ -38,14 +38,14 @@ class Test(unittest.TestCase):
 
     # Templating
 
-    def test_get_plain_text(self):
+    def test_templating_get_plain_text(self):
         response = self.client.get("/text/1")
         assert CONTENT_TYPE_HEADER in response.headers
         assert response.headers[CONTENT_TYPE_HEADER] == "text/plain"
         assert response.status_code == 200
         assert response.text == "test 1"
 
-    def test_get_json(self):
+    def test_templating_get_json(self):
         response = self.client.get("/json/1")
         assert CONTENT_TYPE_HEADER in response.headers
         assert response.headers[CONTENT_TYPE_HEADER] == "application/json"
