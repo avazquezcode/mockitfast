@@ -8,10 +8,15 @@ from config.config import Config
 
 from fastapi.testclient import TestClient
 
-CONTENT_TYPE_HEADER = "content-type"
+HEADER_CONTENT_TYPE = "content-type"
+HEADER_LOCATION = "location"
 
 
 class Test(unittest.TestCase):
+    # ------------- #
+    # Initial Setup #
+    # ------------- #
+
     router = Router(
         endpoints=get_endpoints(),
     )
@@ -20,42 +25,46 @@ class Test(unittest.TestCase):
     app = get_app(router, config)
     client = TestClient(app)
 
-    # Basic cases
+    # ------------- #
+    # Basic cases   #
+    # ------------- #
 
     def test_get_plain_text(self):
         response = self.client.get("/text")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "text/plain"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
         assert response.status_code == 200
         assert response.text == "test"
 
     def test_get_json(self):
         response = self.client.get("/json")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "application/json"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
         assert response.status_code == 200
         assert response.json() == {"success": True}
 
     def test_get_html(self):
         response = self.client.get("/html")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "text/html"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
         assert response.status_code == 200
         assert response.text == "<p>hey</p>"
 
-    # Templating
+    # ------------- #
+    # Templating    #
+    # ------------- #
 
     def test_templating_get_plain_text(self):
         response = self.client.get("/text/1")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "text/plain"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
         assert response.status_code == 200
         assert response.text == "test 1"
 
     def test_templating_get_json(self):
         response = self.client.get("/json/1")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "application/json"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
         assert response.status_code == 200
         assert response.json() == {
             "success": True,
@@ -65,21 +74,25 @@ class Test(unittest.TestCase):
 
     def test_templating_get_html(self):
         response = self.client.get("/html/1")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "text/html"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
         assert response.status_code == 200
         assert response.text == "<p>1</p>"
 
-    #  Delay
+    # ------------- #
+    # Delay         #
+    # ------------- #
+
     def test_delay(self):
         response = self.client.get("/delay")
-        assert CONTENT_TYPE_HEADER in response.headers
-        assert response.headers[CONTENT_TYPE_HEADER] == "text/plain"
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
         assert response.status_code == 200
         assert response.text == "test"
 
-    # Health check
-
+    # ------------- #
+    # Health check  #
+    # ------------- #
     def test_health_check(self):
         response = self.client.get("/health/check")
         assert response.status_code == 200
