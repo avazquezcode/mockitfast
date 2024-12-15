@@ -42,7 +42,7 @@ def get_endpoints() -> list[Endpoint]:
             response=Response(
                 headers={"Content-Type": "application/xml"},
                 status=200,
-                body='<?xml version="1.0" encoding="UTF-8" standalone="yes"?> </xml>',
+                body="<accounts></accounts>",
             ),
         ),
         # GET: Redirect
@@ -107,6 +107,16 @@ def get_endpoints() -> list[Endpoint]:
                 headers={"Content-Type": "text/html"},
                 status=200,
                 body="<p>{user_id}</p>"
+            ),
+        ),
+        # GET: XML endpoint - with templating
+        Endpoint(
+            path="/xml/{user_id}",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "application/xml"},
+                status=200,
+                body="<accounts_{user_id}></accounts_{user_id}>",
             ),
         ),
         # Delay

@@ -55,7 +55,7 @@ class Test(unittest.TestCase):
         assert HEADER_CONTENT_TYPE in response.headers
         assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
         assert response.status_code == 200
-        assert response.text == '<?xml version="1.0" encoding="UTF-8" standalone="yes"?> </xml>'
+        assert response.text == "<accounts></accounts>"
 
     def test_get_redirect(self):
         response = self.client.get("/redirect", follow_redirects=False)
@@ -103,6 +103,13 @@ class Test(unittest.TestCase):
         assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
         assert response.status_code == 200
         assert response.text == "<p>1</p>"
+
+    def test_templating_get_xml(self):
+        response = self.client.get("/xml/1")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
+        assert response.status_code == 200
+        assert response.text == "<accounts_1></accounts_1>"
 
     # ------------- #
     # Delay         #

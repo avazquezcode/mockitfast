@@ -92,6 +92,19 @@
         },
         "body": "<p>hey</p>"
       }
+    },
+    {
+      "path": "/xml",
+      "description": "XML",
+      "method": "GET",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/xml",
+          "Cache-Control": "no-cache"
+        },
+        "body": "<accounts></accounts>"
+      }
     }
   ]
 }
