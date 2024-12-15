@@ -114,6 +114,12 @@ class Test(unittest.TestCase):
                 target={"abc": {"b": ["1", "{a}"]}},
                 expected={"abc": {"b": ["1", "b"]}},
             ),
+            TestCase(
+                name="key is not a string",
+                variables={"a": "b"},
+                target={1: "abc"},
+                expected={1: "abc"},
+            ),
         ]
 
         for test in tests:
