@@ -1,6 +1,7 @@
 # Mock-it (really) fast :D
 
 [![codecov](https://codecov.io/gh/avazquezcode/mockitfast/graph/badge.svg?token=PEY1SMQONJ)](https://codecov.io/gh/avazquezcode/mockitfast)
+<img src="https://img.shields.io/badge/language-python-blue?style"/>
 
 > **_NOTE:_**  This project is under development (working on it, for fun, on my free time). This means it's not ready to be used (yet)
 
