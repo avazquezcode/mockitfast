@@ -39,7 +39,7 @@ jobs:
 
     - name: Test
       run: |
-        coverage run -m unittest discover -s src -p 'test_*.py'
+        coverage run -m --source=src unittest discover -s src -p 'test_*.py'
 
     - name: Coverage report
       run: |
