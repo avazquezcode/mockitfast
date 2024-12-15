@@ -35,6 +35,16 @@ def get_endpoints() -> list[Endpoint]:
                 body="<p>hey</p>",
             ),
         ),
+        # GET: Redirect
+        Endpoint(
+            path="/redirect",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "redirect",
+                         "location": "http://google.com"},
+                status=307,
+            ),
+        ),
         # GET: Plain text endpoint - with templating
         Endpoint(
             path="/text/{user_id}",

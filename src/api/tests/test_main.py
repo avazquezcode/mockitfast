@@ -50,6 +50,13 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.text == "<p>hey</p>"
 
+    def test_get_redirect(self):
+        response = self.client.get("/redirect", follow_redirects=False)
+        print(response.status_code)
+        assert HEADER_LOCATION in response.headers
+        assert response.headers[HEADER_LOCATION] == "http://google.com"
+        assert response.status_code == 307
+
     # ------------- #
     # Templating    #
     # ------------- #
