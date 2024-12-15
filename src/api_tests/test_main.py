@@ -8,6 +8,8 @@ from fastapi.testclient import TestClient
 import unittest
 from dataclasses import dataclass
 
+CONTENT_TYPE_HEADER = "content-type"
+
 
 class Test(unittest.TestCase):
     router = Router(
@@ -19,13 +21,18 @@ class Test(unittest.TestCase):
     client = TestClient(app)
 
     def test_get_plain_text(self):
-        response = self.client.get("/api/test/endpoint")
-        assert response.headers == {
-            "content-type": "text/plain",
-            "content-length": "4"
-        }
+        response = self.client.get("/text")
+        assert CONTENT_TYPE_HEADER in response.headers
+        assert response.headers[CONTENT_TYPE_HEADER] == "text/plain"
         assert response.status_code == 200
         assert response.text == "test"
+
+    def test_get_json(self):
+        response = self.client.get("/json")
+        assert CONTENT_TYPE_HEADER in response.headers
+        assert response.headers[CONTENT_TYPE_HEADER] == "application/json"
+        assert response.status_code == 200
+        assert response.json() == {"success": True}
 
     def test_health_check(self):
         response = self.client.get("/health/check")
