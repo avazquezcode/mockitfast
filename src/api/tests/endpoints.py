@@ -59,6 +59,16 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
+        # GET: HTML endpoint - with templating
+        Endpoint(
+            path="/html/{user_id}",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "text/html"},
+                status=200,
+                body="<p>{user_id}</p>"
+            ),
+        ),
         # Delay
         Endpoint(
             path="/delay",

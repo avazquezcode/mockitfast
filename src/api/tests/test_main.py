@@ -63,6 +63,13 @@ class Test(unittest.TestCase):
             "abc": "1",
         }
 
+    def test_templating_get_html(self):
+        response = self.client.get("/html/1")
+        assert CONTENT_TYPE_HEADER in response.headers
+        assert response.headers[CONTENT_TYPE_HEADER] == "text/html"
+        assert response.status_code == 200
+        assert response.text == "<p>1</p>"
+
     #  Delay
     def test_delay(self):
         response = self.client.get("/delay")
