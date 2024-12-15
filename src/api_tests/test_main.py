@@ -20,6 +20,8 @@ class Test(unittest.TestCase):
     app = get_app(router, config)
     client = TestClient(app)
 
+    # Basic cases
+
     def test_get_plain_text(self):
         response = self.client.get("/text")
         assert CONTENT_TYPE_HEADER in response.headers
@@ -33,6 +35,28 @@ class Test(unittest.TestCase):
         assert response.headers[CONTENT_TYPE_HEADER] == "application/json"
         assert response.status_code == 200
         assert response.json() == {"success": True}
+
+    # Templating
+
+    def test_get_plain_text(self):
+        response = self.client.get("/text/1")
+        assert CONTENT_TYPE_HEADER in response.headers
+        assert response.headers[CONTENT_TYPE_HEADER] == "text/plain"
+        assert response.status_code == 200
+        assert response.text == "test 1"
+
+    def test_get_json(self):
+        response = self.client.get("/json/1")
+        assert CONTENT_TYPE_HEADER in response.headers
+        assert response.headers[CONTENT_TYPE_HEADER] == "application/json"
+        assert response.status_code == 200
+        assert response.json() == {
+            "success": True,
+            "user_id_1": "abc",
+            "abc": "1",
+        }
+
+    # Health check
 
     def test_health_check(self):
         response = self.client.get("/health/check")

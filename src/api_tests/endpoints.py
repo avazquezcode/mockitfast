@@ -25,4 +25,28 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
+        # GET: Plain text endpoint - with templating
+        Endpoint(
+            path="/text/{user_id}",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "text/plain"},
+                status=200,
+                body="test {user_id}"
+            ),
+        ),
+        # GET: JSON endpoint - with templating
+        Endpoint(
+            path="/json/{user_id}",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "application/json"},
+                status=200,
+                body={
+                    "success": True,
+                    "user_id_{user_id}": "abc",
+                    "abc": "{user_id}",
+                },
+            ),
+        ),
     ]
