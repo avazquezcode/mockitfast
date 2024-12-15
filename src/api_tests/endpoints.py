@@ -49,4 +49,15 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
+        # Delay
+        Endpoint(
+            path="/delay",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "text/plain"},
+                status=200,
+                delay=1,
+                body="test"
+            ),
+        ),
     ]
