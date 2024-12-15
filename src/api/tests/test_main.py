@@ -52,10 +52,21 @@ class Test(unittest.TestCase):
 
     def test_get_redirect(self):
         response = self.client.get("/redirect", follow_redirects=False)
-        print(response.status_code)
         assert HEADER_LOCATION in response.headers
         assert response.headers[HEADER_LOCATION] == "http://google.com"
         assert response.status_code == 307
+
+    def test_get_no_content_type_str(self):
+        response = self.client.get("/no-content-type-str")
+        assert HEADER_CONTENT_TYPE not in response.headers
+        assert response.status_code == 200
+        assert response.text == "test"
+
+    def test_get_no_content_type_json(self):
+        response = self.client.get("/no-content-type-json")
+        assert HEADER_CONTENT_TYPE not in response.headers
+        assert response.status_code == 200
+        assert response.json() == {"success": True}
 
     # ------------- #
     # Templating    #

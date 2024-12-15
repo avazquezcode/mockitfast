@@ -45,6 +45,26 @@ def get_endpoints() -> list[Endpoint]:
                 status=307,
             ),
         ),
+        # GET: No content type (string)
+        Endpoint(
+            path="/no-content-type-str",
+            method="GET",
+            response=Response(
+                status=200,
+                body="test",
+            ),
+        ),
+        # GET: No content type (json)
+        Endpoint(
+            path="/no-content-type-json",
+            method="GET",
+            response=Response(
+                status=200,
+                body={
+                    "success": True,
+                },
+            ),
+        ),
         # GET: Plain text endpoint - with templating
         Endpoint(
             path="/text/{user_id}",
