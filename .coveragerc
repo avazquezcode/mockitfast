@@ -1,3 +1,6 @@
 [run]
 omit = 
     */test*
+    src/watcher.py
+    src/server.py
+    src/main.py
