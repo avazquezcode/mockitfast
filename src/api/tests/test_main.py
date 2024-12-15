@@ -1,5 +1,4 @@
 import unittest
-from dataclasses import dataclass
 
 from api.tests.endpoints import get_endpoints
 from api.app import get_app

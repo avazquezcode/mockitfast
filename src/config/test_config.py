@@ -20,7 +20,16 @@ class TestConfig_LoadFromEnv(unittest.TestCase):
         self.assertEqual(config.health_check_path, DEFAULT_HEALTH_CHECK_PATH)
         self.assertIsNone(config.router_config_path)  # No default provided
 
-    @patch.dict(os.environ, {"HOST": "127.0.0.1", "PORT": "8080", "WATCHER_INTERVAL_SECONDS": "5", "HEALTH_CHECK_ENABLED": "true", "HEALTH_CHECK_PATH": "/status"}, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "HOST": "127.0.0.1",
+            "PORT": "8080",
+            "WATCHER_INTERVAL_SECONDS": "5",
+            "HEALTH_CHECK_ENABLED": "true",
+            "HEALTH_CHECK_PATH": "/status"
+        }, clear=True
+    )
     def test_config_with_env_variables_partially_provided(self):
         config = Config()
         config.load_from_env()
@@ -32,7 +41,17 @@ class TestConfig_LoadFromEnv(unittest.TestCase):
         self.assertEqual(config.health_check_path, "/status")
         self.assertIsNone(config.router_config_path)  # No default provided
 
-    @patch.dict(os.environ, {"HOST": "127.0.0.1", "PORT": "8080", "WATCHER_INTERVAL_SECONDS": "5", "HEALTH_CHECK_ENABLED": "true", "HEALTH_CHECK_PATH": "/status", "ROUTER_CONFIG_PATH": "config.json"}, clear=True)
+    @patch.dict(
+        os.environ, {
+            "HOST": "127.0.0.1",
+            "PORT": "8080",
+            "WATCHER_INTERVAL_SECONDS": "5",
+            "HEALTH_CHECK_ENABLED": "true",
+            "HEALTH_CHECK_PATH": "/status",
+            "ROUTER_CONFIG_PATH": "config.json"
+        },
+        clear=True
+    )
     def test_config_with_env_variables_all_provided(self):
         config = Config()
         config.load_from_env()

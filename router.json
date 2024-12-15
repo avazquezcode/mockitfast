@@ -81,16 +81,16 @@
       }
     },
     {
-      "path": "/html",
-      "description": "HTML",
+      "path": "/gettest",
+      "description": "GET",
       "method": "GET",
       "response": {
         "status": 200,
         "headers": {
-          "Content-Type": "text/html",
+          "Content-Type": "text/plain",
           "Cache-Control": "no-cache"
         },
-        "body": "<p>hey</p>"
+        "body": "test"
       }
     },
     {
