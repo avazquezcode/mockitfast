@@ -79,6 +79,19 @@
         },
         "body": "This is a plain {user_id} text"
       }
+    },
+    {
+      "path": "/html",
+      "description": "HTML",
+      "method": "GET",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "text/html",
+          "Cache-Control": "no-cache"
+        },
+        "body": "<p>hey</p>"
+      }
     }
   ]
 }

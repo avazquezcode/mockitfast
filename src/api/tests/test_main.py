@@ -36,6 +36,13 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.json() == {"success": True}
 
+    def test_get_html(self):
+        response = self.client.get("/html")
+        assert CONTENT_TYPE_HEADER in response.headers
+        assert response.headers[CONTENT_TYPE_HEADER] == "text/html"
+        assert response.status_code == 200
+        assert response.text == "<p>hey</p>"
+
     # Templating
 
     def test_templating_get_plain_text(self):

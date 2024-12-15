@@ -25,6 +25,16 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
+        # GET: HTML endpoint
+        Endpoint(
+            path="/html",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "text/html"},
+                status=200,
+                body="<p>hey</p>",
+            ),
+        ),
         # GET: Plain text endpoint - with templating
         Endpoint(
             path="/text/{user_id}",
