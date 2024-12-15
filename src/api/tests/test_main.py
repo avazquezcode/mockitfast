@@ -50,6 +50,13 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.text == "<p>hey</p>"
 
+    def test_get_xml(self):
+        response = self.client.get("/xml")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
+        assert response.status_code == 200
+        assert response.text == '<?xml version="1.0" encoding="UTF-8" standalone="yes"?> </xml>'
+
     def test_get_redirect(self):
         response = self.client.get("/redirect", follow_redirects=False)
         assert HEADER_LOCATION in response.headers

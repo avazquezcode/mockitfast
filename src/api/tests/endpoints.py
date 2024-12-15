@@ -35,6 +35,16 @@ def get_endpoints() -> list[Endpoint]:
                 body="<p>hey</p>",
             ),
         ),
+        # GET: XML endpoint
+        Endpoint(
+            path="/xml",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "application/xml"},
+                status=200,
+                body='<?xml version="1.0" encoding="UTF-8" standalone="yes"?> </xml>',
+            ),
+        ),
         # GET: Redirect
         Endpoint(
             path="/redirect",
