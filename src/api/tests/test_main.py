@@ -154,6 +154,18 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.text == "<accounts_1></accounts_1>"
 
+    #  Test precedence of query parameters variables (among header ones)
+    def test_query_templating_get_plain_text_precedence(self):
+        headers = {"user_id": "3"}
+        response = self.client.get(
+            "/text_query_templating?user_id=1",
+            headers=headers,
+        )
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
+        assert response.status_code == 200
+        assert response.text == "test 1"
+
     # ------------------ #
     # Headers Templating #
     # ------------------ #

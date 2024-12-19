@@ -2,7 +2,8 @@ def replace_variables_in_str(variables: dict, text: str) -> str:
     #  This is a function that replaces all occurrences of variables in a string
     for var, val in variables.items():
         var_candidate = "{" + var + "}"
-        text = text.replace(var_candidate, val)
+        if text is not None:
+            text = text.replace(var_candidate, val)
     return text
 
 

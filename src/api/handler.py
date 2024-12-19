@@ -20,16 +20,24 @@ class Handler:
         return FastAPIResponse(body, self.data.status, self.data.headers)
 
     def transform_body(self, body, request: Request):
+        #  The order here matters,
+        #  and dictates the precedence of each source
+        templating_sources = [
+            request.path_params,
+            request.query_params,
+            request.headers,
+        ]
+
         if type(body) is dict:
-            # Templating, using path variables
-            body = replace_variables_in_dict(request.path_params, body)
-            # Templating, using query parameters variables
-            body = replace_variables_in_dict(request.query_params, body)
-            # JSON dump
+            for templating_variables_source in templating_sources:
+                body = replace_variables_in_dict(
+                    templating_variables_source, body
+                )
+
             body = json.dumps(body)
         else:
-            # Templating, using path variables
-            body = replace_variables_in_str(request.path_params, body)
-            # Templating, using query parameters variables
-            body = replace_variables_in_str(request.query_params, body)
+            for templating_variables_source in templating_sources:
+                body = replace_variables_in_str(
+                    templating_variables_source, body
+                )
         return body
