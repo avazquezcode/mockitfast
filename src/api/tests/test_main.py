@@ -154,6 +154,46 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.text == "<accounts_1></accounts_1>"
 
+    # ------------------ #
+    # Headers Templating #
+    # ------------------ #
+
+    def test_headers_templating_get_plain_text(self):
+        headers = {"user_id": "1"}
+        response = self.client.get("/text_query_templating", headers=headers)
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
+        assert response.status_code == 200
+        assert response.text == "test 1"
+
+    def test_headers_templating_get_json(self):
+        headers = {"user_id": "1"}
+        response = self.client.get("/json_query_templating", headers=headers)
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
+        assert response.status_code == 200
+        assert response.json() == {
+            "success": True,
+            "user_id_1": "abc",
+            "abc": "1",
+        }
+
+    def test_headers_templating_get_html(self):
+        headers = {"user_id": "1"}
+        response = self.client.get("/html_query_templating", headers=headers)
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
+        assert response.status_code == 200
+        assert response.text == "<p>1</p>"
+
+    def test_headers_templating_get_xml(self):
+        headers = {"user_id": "1"}
+        response = self.client.get("/xml_query_templating", headers=headers)
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
+        assert response.status_code == 200
+        assert response.text == "<accounts_1></accounts_1>"
+
     # ------------- #
     # Delay         #
     # ------------- #
