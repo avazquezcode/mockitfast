@@ -110,6 +110,14 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.text == "<accounts_1></accounts_1>"
 
+    #  Test precedence of path variables (among the rest)
+    def test_path_templating_get_plain_text_precedence(self):
+        response = self.client.get("/text/1?user_id=2")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
+        assert response.status_code == 200
+        assert response.text == "test 1"
+
     # ---------------- #
     # Query Templating #
     # ---------------- #

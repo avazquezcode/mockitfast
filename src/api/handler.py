@@ -21,8 +21,15 @@ class Handler:
 
     def transform_body(self, body, request: Request):
         if type(body) is dict:
+            # Templating, using path variables
             body = replace_variables_in_dict(request.path_params, body)
+            # Templating, using query parameters variables
+            body = replace_variables_in_dict(request.query_params, body)
+            # JSON dump
             body = json.dumps(body)
         else:
+            # Templating, using path variables
             body = replace_variables_in_str(request.path_params, body)
+            # Templating, using query parameters variables
+            body = replace_variables_in_str(request.query_params, body)
         return body
