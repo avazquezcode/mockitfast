@@ -119,6 +119,50 @@ def get_endpoints() -> list[Endpoint]:
                 body="<accounts_{user_id}></accounts_{user_id}>",
             ),
         ),
+        # GET: Plain text endpoint - with query templating
+        Endpoint(
+            path="/text_query_templating",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "text/plain"},
+                status=200,
+                body="test {user_id}"
+            ),
+        ),
+        # GET: JSON endpoint - with query templating
+        Endpoint(
+            path="/json_query_templating",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "application/json"},
+                status=200,
+                body={
+                    "success": True,
+                    "user_id_{user_id}": "abc",
+                    "abc": "{user_id}",
+                },
+            ),
+        ),
+        # GET: HTML endpoint - with query templating
+        Endpoint(
+            path="/html_query_templating",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "text/html"},
+                status=200,
+                body="<p>{user_id}</p>"
+            ),
+        ),
+        # GET: XML endpoint - with query templating
+        Endpoint(
+            path="/xml_query_templating",
+            method="GET",
+            response=Response(
+                headers={"Content-Type": "application/xml"},
+                status=200,
+                body="<accounts_{user_id}></accounts_{user_id}>",
+            ),
+        ),
         # Delay
         Endpoint(
             path="/delay",

@@ -74,18 +74,18 @@ class Test(unittest.TestCase):
         assert response.status_code == 200
         assert response.json() == {"success": True}
 
-    # ------------- #
-    # Templating    #
-    # ------------- #
+    # --------------- #
+    # Path Templating #
+    # --------------- #
 
-    def test_templating_get_plain_text(self):
+    def test_path_templating_get_plain_text(self):
         response = self.client.get("/text/1")
         assert HEADER_CONTENT_TYPE in response.headers
         assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
         assert response.status_code == 200
         assert response.text == "test 1"
 
-    def test_templating_get_json(self):
+    def test_path_templating_get_json(self):
         response = self.client.get("/json/1")
         assert HEADER_CONTENT_TYPE in response.headers
         assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
@@ -96,15 +96,59 @@ class Test(unittest.TestCase):
             "abc": "1",
         }
 
-    def test_templating_get_html(self):
+    def test_path_templating_get_html(self):
         response = self.client.get("/html/1")
         assert HEADER_CONTENT_TYPE in response.headers
         assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
         assert response.status_code == 200
         assert response.text == "<p>1</p>"
 
-    def test_templating_get_xml(self):
+    def test_path_templating_get_xml(self):
         response = self.client.get("/xml/1")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
+        assert response.status_code == 200
+        assert response.text == "<accounts_1></accounts_1>"
+
+    #  Test precedence of path variables (among the rest)
+    def test_path_templating_get_plain_text_precedence(self):
+        response = self.client.get("/text/1?user_id=2")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
+        assert response.status_code == 200
+        assert response.text == "test 1"
+
+    # ---------------- #
+    # Query Templating #
+    # ---------------- #
+
+    def test_query_templating_get_plain_text(self):
+        response = self.client.get("/text_query_templating?user_id=1")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
+        assert response.status_code == 200
+        assert response.text == "test 1"
+
+    def test_query_templating_get_json(self):
+        response = self.client.get("/json_query_templating?user_id=1")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
+        assert response.status_code == 200
+        assert response.json() == {
+            "success": True,
+            "user_id_1": "abc",
+            "abc": "1",
+        }
+
+    def test_query_templating_get_html(self):
+        response = self.client.get("/html_query_templating?user_id=1")
+        assert HEADER_CONTENT_TYPE in response.headers
+        assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
+        assert response.status_code == 200
+        assert response.text == "<p>1</p>"
+
+    def test_query_templating_get_xml(self):
+        response = self.client.get("/xml_query_templating?user_id=1")
         assert HEADER_CONTENT_TYPE in response.headers
         assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
         assert response.status_code == 200
