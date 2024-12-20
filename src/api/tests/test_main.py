@@ -139,7 +139,7 @@ class Test(unittest.TestCase):
     def test_query_templating_plain_text(self):
         for method in SUPPORTED_METHODS:
             response = self.client.request(
-                method, "/text_query_templating?user_id=1"
+                method, "/text_templating?user_id=1"
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
@@ -149,7 +149,7 @@ class Test(unittest.TestCase):
     def test_query_templating_json(self):
         for method in SUPPORTED_METHODS:
             response = self.client.request(
-                method, "/json_query_templating?user_id=1"
+                method, "/json_templating?user_id=1"
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
@@ -163,7 +163,7 @@ class Test(unittest.TestCase):
     def test_query_templating_html(self):
         for method in SUPPORTED_METHODS:
             response = self.client.request(
-                method, "/html_query_templating?user_id=1"
+                method, "/html_templating?user_id=1"
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
@@ -173,7 +173,7 @@ class Test(unittest.TestCase):
     def test_query_templating_xml(self):
         for method in SUPPORTED_METHODS:
             response = self.client.request(
-                method, "/xml_query_templating?user_id=1"
+                method, "/xml_templating?user_id=1"
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"
@@ -185,7 +185,7 @@ class Test(unittest.TestCase):
         for method in SUPPORTED_METHODS:
             headers = {"user_id": "3"}
             response = self.client.request(
-                method, "/text_query_templating?user_id=1", headers=headers
+                method, "/text_templating?user_id=1", headers=headers
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
@@ -200,7 +200,7 @@ class Test(unittest.TestCase):
         for method in SUPPORTED_METHODS:
             headers = {"user_id": "1"}
             response = self.client.request(
-                method, "/text_query_templating", headers=headers)
+                method, "/text_templating", headers=headers)
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "text/plain"
             assert response.status_code == 200
@@ -210,7 +210,7 @@ class Test(unittest.TestCase):
         for method in SUPPORTED_METHODS:
             headers = {"user_id": "1"}
             response = self.client.request(
-                method, "/json_query_templating", headers=headers)
+                method, "/json_templating", headers=headers)
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "application/json"
             assert response.status_code == 200
@@ -224,7 +224,7 @@ class Test(unittest.TestCase):
         for method in SUPPORTED_METHODS:
             headers = {"user_id": "1"}
             response = self.client.request(
-                method, "/html_query_templating", headers=headers
+                method, "/html_templating", headers=headers
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "text/html"
@@ -235,7 +235,7 @@ class Test(unittest.TestCase):
         for method in SUPPORTED_METHODS:
             headers = {"user_id": "1"}
             response = self.client.request(
-                method, "/xml_query_templating", headers=headers
+                method, "/xml_templating", headers=headers
             )
             assert HEADER_CONTENT_TYPE in response.headers
             assert response.headers[HEADER_CONTENT_TYPE] == "application/xml"

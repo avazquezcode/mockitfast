@@ -88,7 +88,7 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
         ),
         # Plain text endpoint - with templating
         Endpoint(
-            path="/text/{user_id}",
+            path="/text_templating",
             method=method,
             response=Response(
                 headers={"Content-Type": "text/plain"},
@@ -98,7 +98,7 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
         ),
         # JSON endpoint - with templating
         Endpoint(
-            path="/json/{user_id}",
+            path="/json_templating",
             method=method,
             response=Response(
                 headers={"Content-Type": "application/json"},
@@ -112,7 +112,7 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
         ),
         # HTML endpoint - with templating
         Endpoint(
-            path="/html/{user_id}",
+            path="/html_templating",
             method=method,
             response=Response(
                 headers={"Content-Type": "text/html"},
@@ -122,7 +122,7 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
         ),
         # XML endpoint - with templating
         Endpoint(
-            path="/xml/{user_id}",
+            path="/xml_templating",
             method=method,
             response=Response(
                 headers={"Content-Type": "application/xml"},
@@ -130,9 +130,9 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
                 body="<accounts_{user_id}></accounts_{user_id}>",
             ),
         ),
-        # Plain text endpoint - with query templating
+        # Plain text endpoint - with path templating
         Endpoint(
-            path="/text_query_templating",
+            path="/text/{user_id}",
             method=method,
             response=Response(
                 headers={"Content-Type": "text/plain"},
@@ -140,9 +140,9 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
                 body="test {user_id}"
             ),
         ),
-        # JSON endpoint - with query templating
+        # JSON endpoint - with path templating
         Endpoint(
-            path="/json_query_templating",
+            path="/json/{user_id}",
             method=method,
             response=Response(
                 headers={"Content-Type": "application/json"},
@@ -154,9 +154,9 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
                 },
             ),
         ),
-        # HTML endpoint - with query templating
+        # HTML endpoint - with path templating
         Endpoint(
-            path="/html_query_templating",
+            path="/html/{user_id}",
             method=method,
             response=Response(
                 headers={"Content-Type": "text/html"},
@@ -164,9 +164,9 @@ def _get_base_endpoints(method: str) -> list[Endpoint]:
                 body="<p>{user_id}</p>"
             ),
         ),
-        # XML endpoint - with query templating
+        # XML endpoint - with path templating
         Endpoint(
-            path="/xml_query_templating",
+            path="/xml/{user_id}",
             method=method,
             response=Response(
                 headers={"Content-Type": "application/xml"},
