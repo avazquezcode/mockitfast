@@ -11,6 +11,6 @@
 
 A super simple HTTP mock server, written with love in Python, with FastAPI :)
 
-The [contributing](CONTRIBUTING.md) file, contains the instructions to build & run the project, and some data about how the system works.
+The [contributing](docs/CONTRIBUTING.md) file, contains the instructions to build & run the project, and some data about how the system works.
 
 For a more detailed documentation, you can check [here](https://docs.agustinvazquez.me/mockitfast).

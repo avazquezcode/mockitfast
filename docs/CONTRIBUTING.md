@@ -16,8 +16,8 @@ Run `make run` to start the container.
 You can check the documentation about how to use this service [here](https://docs.agustinvazquez.me/mockitfast).
 
 ## Router config
-You can configure your mocked API in the [router.json](./router.json) file.
-You can modify it on the run, while the service is running and the changes will be impacted on runtime. This is achieved using a really simple [file watcher](./src/watcher.py).
+You can configure your mocked API in the [router.json](../example/router.json) file.
+You can modify it on the run, while the service is running and the changes will be impacted on runtime. This is achieved using a really simple [file watcher](../src/watcher.py).
 
 ## Swagger
 
@@ -27,4 +27,4 @@ After running the project you can access the swagger of your mocked API going to
 
 You should see something like the following:
 
-![alt text](image.png)
+![alt text](./img/swagger.png)
