@@ -1,22 +1,33 @@
 from domain.model import Endpoint, Response
 
+SUPPORTED_METHODS = [
+    "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "TRACE", "CONNECT",
+]
+
 
 def get_endpoints() -> list[Endpoint]:
+    endpoints = []
+    for method in SUPPORTED_METHODS:
+        endpoints.extend(_get_base_endpoints(method))
+    return endpoints
+
+
+def _get_base_endpoints(method: str) -> list[Endpoint]:
     return [
-        # GET: Plain text endpoint
+        # Plain text endpoint
         Endpoint(
             path="/text",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/plain"},
                 status=200,
                 body="test"
             ),
         ),
-        # GET: JSON endpoint
+        # JSON endpoint
         Endpoint(
             path="/json",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "application/json"},
                 status=200,
@@ -25,49 +36,49 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
-        # GET: HTML endpoint
+        # HTML endpoint
         Endpoint(
             path="/html",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/html"},
                 status=200,
                 body="<p>hey</p>",
             ),
         ),
-        # GET: XML endpoint
+        # XML endpoint
         Endpoint(
             path="/xml",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "application/xml"},
                 status=200,
                 body="<accounts></accounts>",
             ),
         ),
-        # GET: Redirect
+        # Redirect
         Endpoint(
             path="/redirect",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "redirect",
                          "location": "http://google.com"},
                 status=307,
             ),
         ),
-        # GET: No content type (string)
+        # No content type (string)
         Endpoint(
             path="/no-content-type-str",
-            method="GET",
+            method=method,
             response=Response(
                 status=200,
                 body="test",
             ),
         ),
-        # GET: No content type (json)
+        # No content type (json)
         Endpoint(
             path="/no-content-type-json",
-            method="GET",
+            method=method,
             response=Response(
                 status=200,
                 body={
@@ -75,20 +86,20 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
-        # GET: Plain text endpoint - with templating
+        # Plain text endpoint - with templating
         Endpoint(
             path="/text/{user_id}",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/plain"},
                 status=200,
                 body="test {user_id}"
             ),
         ),
-        # GET: JSON endpoint - with templating
+        # JSON endpoint - with templating
         Endpoint(
             path="/json/{user_id}",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "application/json"},
                 status=200,
@@ -99,40 +110,40 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
-        # GET: HTML endpoint - with templating
+        # HTML endpoint - with templating
         Endpoint(
             path="/html/{user_id}",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/html"},
                 status=200,
                 body="<p>{user_id}</p>"
             ),
         ),
-        # GET: XML endpoint - with templating
+        # XML endpoint - with templating
         Endpoint(
             path="/xml/{user_id}",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "application/xml"},
                 status=200,
                 body="<accounts_{user_id}></accounts_{user_id}>",
             ),
         ),
-        # GET: Plain text endpoint - with query templating
+        # Plain text endpoint - with query templating
         Endpoint(
             path="/text_query_templating",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/plain"},
                 status=200,
                 body="test {user_id}"
             ),
         ),
-        # GET: JSON endpoint - with query templating
+        # JSON endpoint - with query templating
         Endpoint(
             path="/json_query_templating",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "application/json"},
                 status=200,
@@ -143,20 +154,20 @@ def get_endpoints() -> list[Endpoint]:
                 },
             ),
         ),
-        # GET: HTML endpoint - with query templating
+        # HTML endpoint - with query templating
         Endpoint(
             path="/html_query_templating",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/html"},
                 status=200,
                 body="<p>{user_id}</p>"
             ),
         ),
-        # GET: XML endpoint - with query templating
+        # XML endpoint - with query templating
         Endpoint(
             path="/xml_query_templating",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "application/xml"},
                 status=200,
@@ -166,7 +177,7 @@ def get_endpoints() -> list[Endpoint]:
         # Delay
         Endpoint(
             path="/delay",
-            method="GET",
+            method=method,
             response=Response(
                 headers={"Content-Type": "text/plain"},
                 status=200,
